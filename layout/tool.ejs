@@ -1,0 +1,30 @@
+<%
+page.layout = "tool"
+page.title = theme.tool.title || __('tool.title')
+page.subtitle = theme.tool.subtitle || __('tool.subtitle')
+page.banner_img = theme.tool.banner_img
+page.banner_img_height = theme.tool.banner_img_height
+page.banner_mask_alpha = theme.tool.banner_mask_alpha
+%>
+
+<div class="row links">
+  <% for(const each of theme.tool.items || []) { %>
+    <% if (!each.title || !each.link) continue %>
+    <div class="card col-lg-4 col-md-6 col-sm-12">
+      <a href="<%= url_for(each.link) %>" class="card-body hover-with-bg" target="_blank" rel="noopener">
+        <div class="card-content">
+          <% if (each.avatar || each.image) { %>
+            <div class="link-avatar my-auto">
+              <img src="<%= url_for(each.avatar || each.image) %>" alt="<%= each.title %>"
+                   onerror="this.onerror=null; this.src=this.srcset='<%= url_for(theme.tool.onerror_avatar) %>'"/>
+            </div>
+          <% } %>
+          <div class="link-text">
+            <div class="link-title"><%- each.title %></div>
+            <div class="link-intro"><%- each.intro || '' %></div>
+          </div>
+        </div>
+      </a>
+    </div>
+  <% } %>
+</div>
